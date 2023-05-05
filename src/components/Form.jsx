@@ -4,7 +4,7 @@ import FormInputs from './FormInputs'
 const Form = () => {
   return (
     <div className='mx-4'>
-        <div>
+        <div className='px-2'>
             <h1 className='font-bold font-[raleway] text-[#f0d1b8] text-3xl'>Code Night Başvuru Formu:</h1>
             <br />
 

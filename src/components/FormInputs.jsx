@@ -21,7 +21,7 @@ const FormInputs = () => {
     const [loader, setLoader] = useState(false);
 
     const controlName = (name) => {
-        if (name.length == 0) {
+        if (name.length === 0) {
             setNameController([true, "İsim Soyisim bölümü boş bırakılamaz"]);
             return false;
         }
@@ -62,7 +62,7 @@ const FormInputs = () => {
     } 
 
     const controlTelNo = (telNo) => {
-        if (telNo.length != 11) {
+        if (telNo.length !== 11) {
             setTelNoController([true, "Lütfen geçerli bir telefon numarası giriniz. 11 basamaklı olmalı."]);
             return false;
         }
@@ -87,16 +87,16 @@ const FormInputs = () => {
             console.log(response.data);
             console.log(response.status);
             
-            if (response.status == 201) {
-                if (response.data.email == application.email) {
+            if (response.status === 201) {
+                if (response.data.email === application.email) {
                     setIsDone(true);
                     setApplication(response.data);
                 }
             }
-            else if (response.status == 204) {
+            else if (response.status === 204) {
                 setWarning("Error");
             }
-            else if (response.status == 208) {
+            else if (response.status === 208) {
                 setWarning("Exists");
                 setIsDone(true);
             }
@@ -121,7 +121,7 @@ const FormInputs = () => {
             <p className='text-red-700 text-xs'>{nameController[1]}</p>
         </div>
         <div className='w-full mt-3 p-2 rounded-lg'>
-            <p className='font-bold text-lg font-[raleway] text-[#f0d1b8]'>Okul ID:<span className='text-red-600'> *</span></p>
+            <p className='font-bold text-lg font-[raleway] text-[#f0d1b8]'>Öğrenci Numarası:<span className='text-red-600'> *</span></p>
             {
                 isDone ? (
                     <input type="text" placeholder='290***036' disabled className='w-full px-3 py-2 rounded-md' value={application.schoolId} />
@@ -162,9 +162,10 @@ const FormInputs = () => {
             }
             <p className='text-red-700 text-xs'>{telNoController[1]}</p>
         </div>
-
+        
+        <div className='p-2'>
         {
-            isDone ? (<button className='w-full text-white font-extrabold text-md py-2 bg-gray-500 cursor-default rounded-lg mt-10'>{warning == "Exists" ? "Başvurunuz bulunmaktadır" : "Başvurunuz alındı"}</button>) : 
+            isDone ? (<button className='w-full text-white font-extrabold text-md py-2 bg-gray-500 cursor-default rounded-lg mt-10'>{warning === "Exists" ? "Başvurunuz bulunmaktadır" : "Başvurunuz alındı"}</button>) : 
                 !loader ? <button onClick={() => handleApply(application)} className='w-full text-white font-extrabold text-md py-2 bg-blue-700 rounded-lg mt-10'>Başvur</button> : (
                     <div className='w-full text-white font-extrabold text-md py-2 mt-10 text-center flex justify-center items-center'>
                         <ClipLoader
@@ -180,7 +181,7 @@ const FormInputs = () => {
         }
 
         {
-            isDone && warning != "Exists" ? (
+            isDone && warning !== "Exists" ? (
                 <div className='mt-4'>
                     <p className='text-green-600 text-lg'>{application.fullName}, başvurun alınmıştır. Etkinlikte görüşmek üzere...</p>
                     <p className='text-yellow-400 text-sm'>Herhangi bir sorununuzda whatsapp, instagram (<span className='text-blue-400'>@iyte_yazilim</span>) ve mail (<span className='text-blue-400'>yazilim@iyte.edu.tr</span>) üzerinden sorularınızı iletebilirsiniz.</p>
@@ -188,18 +189,19 @@ const FormInputs = () => {
             ) : null
         }
         {
-            warning == "Error" ? (
+            warning === "Error" ? (
                 <div className='mt-4'>
                     <p className='text-red-600 text-lg'>{application.fullName}, sistemde bir hata oluştu. Lütfen topluluk yöneticilerine sorununuzu bildiriniz.</p>
                     <p className='text-yellow-400 text-sm'>Herhangi bir sorununuzda whatsapp, instagram (<span className='text-blue-400'>@iyte_yazilim</span>) ve mail (<span className='text-blue-400'>yazilim@iyte.edu.tr</span>) üzerinden sorularınızı iletebilirsiniz.</p>
                 </div>
-            ) : warning == "Exists" ? (
+            ) : warning === "Exists" ? (
                 <div className='mt-4'>
                     <p className='text-green-600 text-lg'>{application.fullName}, zaten başvurunuz bulunmaktadır. Etkinlikte görüşmek üzere...</p>
                     <p className='text-yellow-400 text-sm'>Herhangi bir sorununuzda whatsapp, instagram (<span className='text-blue-400'>@iyte_yazilim</span>) ve mail (<span className='text-blue-400'>yazilim@iyte.edu.tr</span>) üzerinden sorularınızı iletebilirsiniz.</p>
                 </div>
             ) : null
         }
+        </div>
     </div>
   )
 }
